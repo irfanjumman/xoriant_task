@@ -1,24 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
-
+import UsersList from './UsersList'
+import React, {useReducer} from 'react';
+import {StateContext, DispatchContext} from './store/store';
+import {initialState} from './store/initialState';
+import {reducers} from './store/reducer';
 function App() {
+  const [state, dispatch] = useReducer(reducers, initialState);
   return (
+    <StateContext.Provider value={state}>
+      <DispatchContext.Provider value={dispatch}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UsersList />
     </div>
+    </DispatchContext.Provider>
+    </StateContext.Provider>
   );
 }
 
